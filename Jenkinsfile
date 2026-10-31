@@ -1,11 +1,6 @@
 
 pipeline {
-
     agent any
-
-    triggers {
-        githubPush()
-    }
 
     stages {
 
@@ -21,7 +16,6 @@ pipeline {
                 echo 'Starting Build...'
 
                 sh 'mkdir -p build'
-
                 sh 'javac -d build Main.java MainTest.java'
 
                 echo 'Build Successful!'
@@ -30,7 +24,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Running Application Tests...'
+                echo 'Running Tests...'
 
                 sh 'java -cp build Main'
                 sh 'java -cp build MainTest'
@@ -38,7 +32,6 @@ pipeline {
                 echo 'All Tests Passed!'
             }
         }
-
     }
 
     post {
@@ -51,7 +44,7 @@ pipeline {
         }
 
         always {
-            echo 'Pipeline Execution Completed.'
+            echo 'Pipeline Execution Completed!'
         }
     }
 }
